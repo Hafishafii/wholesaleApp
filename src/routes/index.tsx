@@ -3,6 +3,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { Home } from "../pages";
 import { NotificationPage } from "../pages/admin/NotificationPage";
 import AddProductPage from "../pages/admin/AddProductPage"; 
+import OrderRequestsPage from "../pages/admin/OrderRequestPage";
 
 const AppRoutes = () => {
   return (
@@ -10,6 +11,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/admin/notifications" element={<NotificationPage />} />
       <Route path="/admin/add-product" element={<AddProductPage />} /> 
+      <Route path="/admin/order-requests" element={<OrderRequestsPage />} /> 
 
       <Route element={<ProtectedRoute />}>
         {/* Add other protected routes here */}
