@@ -20,3 +20,24 @@ export interface OrderRequest {
   quantity: number;
   status: OrderStatus;
 }
+
+
+
+export type OrderDetails = {
+  _id: string;
+  customerName: string;
+  email: string;
+  phone: string;
+  productType: string;
+  customization: {
+    color: string;
+    colorReferenceImg?: string;
+  };
+  patternStyle: string;
+  sampleImage?: string;
+  branding: boolean;
+  quantity: number;
+  bulkOrder: boolean;
+  notes?: string;
+  status: "Pending" | "Accepted" | "Rejected";
+};
