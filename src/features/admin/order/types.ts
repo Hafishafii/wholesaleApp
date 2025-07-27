@@ -32,6 +32,7 @@ export type OrderDetails = {
   customization: {
     color: string;
     colorReferenceImg?: string;
+    fabric?: string;
   };
   patternStyle: string;
   sampleImage?: string;

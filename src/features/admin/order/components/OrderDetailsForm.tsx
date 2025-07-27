@@ -1,5 +1,5 @@
+// src/features/admin/order/components/OrderDetailsForm.tsx
 import type { OrderDetails } from "../types";
-import { Button } from "../../../../components/ui/button";
 import { Input } from "../../../../components/ui/input";
 
 type Props = {
@@ -51,7 +51,7 @@ const OrderDetailsForm = ({ order }: Props) => {
       {/* Customization */}
       <div>
         <h2 className="font-semibold">Customization Options</h2>
-        <Input value={order.customization?.fabric || ""} disabled />
+        <Input value={order.customization?.fabric || "Cotton"} disabled />
         <div className="mt-2">
           <h3 className="font-medium">Color Preferences</h3>
           <div className="flex items-center gap-4 mt-1">
@@ -59,13 +59,14 @@ const OrderDetailsForm = ({ order }: Props) => {
               className="w-6 h-6 rounded-full border"
               style={{ backgroundColor: order.customization?.color || "#ccc" }}
             />
-            {order.customization?.colorReferenceImg && (
-              <img
-                src={order.customization.colorReferenceImg}
-                alt="Color reference"
-                className="w-16 h-16 object-cover rounded border"
-              />
-            )}
+            <img
+              src={
+                order.customization?.colorReferenceImg ||
+                "https://images.unsplash.com/photo-1606813902915-6618b04c8c3e?auto=format&fit=crop&w=60&h=60"
+              }
+              alt="Color reference"
+              className="w-16 h-16 object-cover rounded border"
+            />
           </div>
         </div>
       </div>
@@ -74,13 +75,14 @@ const OrderDetailsForm = ({ order }: Props) => {
       <div>
         <h2 className="font-semibold">Style / Pattern Preferences</h2>
         <Input value={order.patternStyle} disabled />
-        {order.sampleImage && (
-          <img
-            src={order.sampleImage}
-            alt="Sample"
-            className="w-24 h-24 object-cover mt-2 rounded border"
-          />
-        )}
+        <img
+          src={
+            order.sampleImage ||
+            "https://images.unsplash.com/photo-1609250292128-1f8a7b6d56e5?auto=format&fit=crop&w=100&h=100"
+          }
+          alt="Sample"
+          className="w-24 h-24 object-cover mt-2 rounded border"
+        />
       </div>
 
       {/* Branding */}
@@ -135,14 +137,10 @@ const OrderDetailsForm = ({ order }: Props) => {
 
       {/* Action Buttons */}
       <div className="flex justify-between mt-6">
-        <button
-          className="w-1/2 mr-2 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
-        >
+        <button className="w-1/2 mr-2 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition">
           Accept
         </button>
-        <button
-          className="w-1/2 ml-2 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition"
-        >
+        <button className="w-1/2 ml-2 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition">
           Reject
         </button>
       </div>
