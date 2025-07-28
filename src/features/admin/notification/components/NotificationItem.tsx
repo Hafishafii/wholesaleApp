@@ -1,5 +1,3 @@
-// src/features/admin/notification/components/NotificationItem.tsx
-
 import { Button } from "../../../../components/ui/button";
 import { CheckIcon } from "lucide-react";
 import type { AdminNotification } from "../types";
@@ -22,11 +20,18 @@ type Props = {
 
 export const NotificationItem = ({ notification, onMarkAsRead }: Props) => {
   const handleMarkAsRead = () => {
-    if (!notification.isRead) onMarkAsRead(notification.id);
+    if (!notification.isRead) {
+      onMarkAsRead(notification.id);
+    }
   };
 
   return (
-    <div className={`p-4 border rounded-lg ${!notification.isRead ? 'bg-blue-50 border-blue-200' : 'bg-background'}`}>
+    <div
+      onClick={handleMarkAsRead}
+      className={`p-4 border rounded-lg cursor-pointer transition ${
+        !notification.isRead ? "bg-blue-50 border-blue-200" : "bg-background"
+      } hover:shadow-sm`}
+    >
       <div className="flex justify-between items-start gap-3">
         <div className="flex-1">
           <div className="flex items-center gap-2">
@@ -44,8 +49,17 @@ export const NotificationItem = ({ notification, onMarkAsRead }: Props) => {
             </div>
           ))}
         </div>
+
         {!notification.isRead && (
-          <Button variant="ghost" size="icon" className="h-6 w-6" onClick={handleMarkAsRead}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-6 w-6"
+            onClick={(e) => {
+              e.stopPropagation(); 
+              handleMarkAsRead();
+            }}
+          >
             <CheckIcon className="h-4 w-4" />
           </Button>
         )}

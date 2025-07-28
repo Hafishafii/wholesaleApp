@@ -1,4 +1,3 @@
-// src/pages/admin/OrderDetailsPage.tsx
 import { useParams } from "react-router-dom";
 import { useOrderDetails } from "../../features/admin/order/hooks/useOrderDetails";
 import OrderDetailsForm from "../../features/admin/order/components/OrderDetailsForm";

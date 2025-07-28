@@ -1,4 +1,5 @@
 // src/features/admin/order/hooks/useOrderDetails.ts
+
 import { useEffect, useState } from "react";
 import type { OrderDetails } from "../types";
 
@@ -9,7 +10,7 @@ export const useOrderDetails = (orderId: string) => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        // ✅ MOCK data with working Unsplash image links
+        // ✅ MOCK data with real working Unsplash image links
         const mockData: OrderDetails = {
           _id: orderId,
           customerName: "Smitha Ram",
@@ -17,9 +18,10 @@ export const useOrderDetails = (orderId: string) => {
           phone: "+91 9876543210",
           productType: "Sarees",
           customization: {
+            fabric: "Cotton",
             color: "#FF69B4",
             colorReferenceImg:
-              "https://images.unsplash.com/photo-1606813902915-6618b04c8c3e?auto=format&fit=crop&w=60&h=60",
+              "https://images.unsplash.com/photo-1606813902915-6618b04c8c3e?auto=format&fit=crop&w=80&h=80",
           },
           patternStyle: "Floral, Hand-embroidered",
           sampleImage:

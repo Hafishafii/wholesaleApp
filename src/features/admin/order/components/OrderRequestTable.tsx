@@ -1,6 +1,7 @@
 // src/features/admin/order/components/OrderRequestTable.tsx
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import type { OrderRequest } from "../types";
 import { StatusBadge } from "./StatusBadge";
 import { Skeleton } from "../../../../components/ui/skeleton";
@@ -88,14 +89,13 @@ const mockData: OrderRequest[] = [
 export const OrderRequestTable = () => {
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState<OrderRequest[]>([]);
+  const navigate = useNavigate();
 
-  // Simulate data fetching
   useEffect(() => {
     const timer = setTimeout(() => {
       setOrders(mockData);
       setLoading(false);
-    }, 1500); // Simulated 1.5s loading time
-
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -136,7 +136,12 @@ export const OrderRequestTable = () => {
                   <td className="p-3">
                     <StatusBadge status={order.status} />
                   </td>
-                  <td className="p-3 text-right text-blue-600 font-medium cursor-pointer">View</td>
+                  <td
+                    className="p-3 text-right text-blue-600 font-medium cursor-pointer"
+                    onClick={() => navigate(`/admin/order-details/{order.id}`)}
+                  >
+                    View
+                  </td>
                 </tr>
               ))}
         </tbody>
