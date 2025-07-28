@@ -97,18 +97,27 @@ export const useAdminNotifications = () => {
   const [unreadCount, setUnreadCount] = useState(0);
 
   const fetchNotifications = useCallback(async () => {
-    try {
-      setLoading(true);
-      const res = await api.get("/admin/notifications");
-      setNotifications(res.data);
-      setUnreadCount(res.data.filter((n: AdminNotification) => !n.isRead).length);
-    } catch (err) {
-      setError("Failed to load notifications");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  try {
+    setLoading(true);
+    const res = await api.get("/admin/notifications");
+
+    const validTypes = ["alert", "purchase", "system"] as const;
+
+    const sanitized: AdminNotification[] = res.data.map((n: any) => ({
+      ...n,
+      type: validTypes.includes(n.type) ? n.type : "system",
+    }));
+
+    setNotifications(sanitized);
+    setUnreadCount(sanitized.filter((n) => !n.isRead).length);
+  } catch (err) {
+    setError("Failed to load notifications");
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+}, []);
+
 
   const markAsRead = useCallback(async (id: string) => {
     setNotifications((prev) =>
