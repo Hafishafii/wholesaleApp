@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { OrderDetails } from "../types";
 import { Input } from "../../../../components/ui/input";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 type Props = {
   order: OrderDetails;
@@ -16,13 +17,26 @@ const OrderDetailsForm = ({ order }: Props) => {
   const handleUpdateStatus = () => {
     if (isStatusFinal) return;
 
-    // TODO: Replace with actual API/mutation logic
-    console.log("Updating status to:", selectedStatus);
+    Swal.fire({
+      title: "Updating...",
+      text: `Setting status to "${selectedStatus}"`,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
 
     // Simulate API call delay
     setTimeout(() => {
-      navigate("/admin/order-requests");
-    }, 300);
+      Swal.fire({
+        icon: "success",
+        title: "Status Updated",
+        text: `Order marked as "${selectedStatus}"`,
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/admin/order-requests");
+      });
+    }, 1000);
   };
 
   return (
@@ -80,8 +94,8 @@ const OrderDetailsForm = ({ order }: Props) => {
               <img
                 src=
                 // {
-                // order.customization?.colorReferenceImg || 
-                    "https://i.pravatar.cc/150?img=10"
+                  // order.customization?.colorReferenceImg ||
+                  "https://i.pravatar.cc/150?img=10"
                 // }
                 alt="Color ref"
                 className="w-20 h-20 object-cover rounded border"
@@ -100,9 +114,9 @@ const OrderDetailsForm = ({ order }: Props) => {
           <img
             src=
             // {
-            // order.sampleImage ||
-                 "https://i.pravatar.cc/150?img=10"
-                // }
+              // order.sampleImage ||
+              "https://i.pravatar.cc/150?img=10"
+            // }
             alt="Sample pattern"
             className="w-28 h-28 object-cover rounded border mt-2"
             referrerPolicy="no-referrer"
